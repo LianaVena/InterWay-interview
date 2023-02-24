@@ -1,0 +1,18 @@
+<div class="header-spacer"></div>
+<div class="content">
+    <mat-card *ngFor="let comment of comments">
+        <mat-card-header>
+            <mat-card-title>{{comment.name}}</mat-card-title>
+            <span class="example-spacer"></span>
+            <mat-card-actions>
+                <button mat-stroked-button>Edit</button>
+                <button mat-stroked-button>Delete</button>
+            </mat-card-actions>
+        </mat-card-header>
+        <mat-card class="inner-card">
+            <mat-card-content>{{comment.text}}</mat-card-content>
+        </mat-card>
+
+    </mat-card>
+
+</div>
