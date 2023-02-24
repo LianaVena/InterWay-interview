@@ -1,5 +1,31 @@
+<mat-toolbar>
+    <span>Comment Web App</span>
+    <span class="example-spacer"></span>
+    <!-- <button mat-stroked-button (click)="openDialog()">Add</button> -->
+</mat-toolbar>
 <div class="header-spacer"></div>
 <div class="content">
+    <mat-card>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <mat-card-header>
+                <mat-card-title>
+                    <input matInput placeholder="name" [(ngModel)]="newComment.name" required name="name">
+                    <input matInput placeholder="pin" [(ngModel)]="newComment.pin" required name="pin">
+                </mat-card-title>
+                <span class="example-spacer"></span>
+                <mat-card-actions>
+                    <button mat-stroked-button type="submit">Submit</button>
+                </mat-card-actions>
+            </mat-card-header>
+            <mat-card class="inner-card">
+                <mat-card-content>
+                    <textarea style="width: inherit; max-width: inherit;" matInput [(ngModel)]="newComment.text"
+                        required name="text"></textarea>
+                </mat-card-content>
+            </mat-card>
+        </form>
+        <p *ngIf="errorMessage">{{errorMessage}}</p>
+    </mat-card>
     <mat-card *ngFor="let comment of comments">
         <mat-card-header>
             <mat-card-title>{{comment.name}}</mat-card-title>
@@ -12,7 +38,5 @@
         <mat-card class="inner-card">
             <mat-card-content>{{comment.text}}</mat-card-content>
         </mat-card>
-
     </mat-card>
-
 </div>
