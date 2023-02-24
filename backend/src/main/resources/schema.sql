@@ -1,0 +1,6 @@
+CREATE TABLE comment (
+    id INT PRIMARY KEY,
+    name VARCHAR(32) NOT NULL,
+    text VARCHAR(512) NOT NULL,
+    pin VARCHAR(16) NOT NULL
+);
