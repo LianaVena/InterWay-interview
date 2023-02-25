@@ -24,4 +24,11 @@ export class CommentService {
       { headers: { 'content-type': 'application/json' } }
     );
   }
+
+  public deleteComment(id: number, pin: string): Observable<any> {
+    return this.http.delete<any>(this.commentUrl + '/delete', {
+      params: { id: id, pin: pin },
+      observe: 'response',
+    });
+  }
 }

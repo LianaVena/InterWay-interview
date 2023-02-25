@@ -16,10 +16,6 @@ public class CommentService {
     this.commentRepository = commentRepository;
   }
 
-  public Comment findCommentByPin(String pin) {
-    commentRepository.fin
-  }
-
   public List<Comment> getAllComments() {
     return commentRepository.findAll();
   }
@@ -32,5 +28,13 @@ public class CommentService {
     return false;
   }
 
-  public
+  public boolean deleteComment(Long id, String pin) {
+    Comment comment = commentRepository.findById(id).orElse(null);
+    if (comment != null && comment.getPin().equals(pin)) {
+      commentRepository.delete(comment);
+      return true;
+    }
+    return false;
+  }
+
 }

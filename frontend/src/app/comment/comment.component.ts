@@ -1,8 +1,7 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { catchError, throwError } from 'rxjs';
+import { DialogAddCommentComponent } from '../dialog/dialog-add-comment/dialog-add-comment.component';
+import { DialogDeleteComponent } from '../dialog/dialog-delete/dialog-delete.component';
 import { Comment } from './comment';
 import { CommentService } from './comment.service';
 
@@ -13,7 +12,7 @@ import { CommentService } from './comment.service';
 })
 export class CommentComponent {
   comments: Comment[] = [];
-  newComment: Comment = { name: '', text: '', pin: '' };
+  newComment: Comment = { id: -1, name: '', text: '', pin: '' };
   errorMessage: string = '';
 
   constructor(
@@ -22,31 +21,23 @@ export class CommentComponent {
   ) {}
 
   ngOnInit() {
+    this.loadComments();
+  }
+
+  loadComments() {
     this.commentService
       .findAll()
       .subscribe((comments) => (this.comments = comments));
   }
 
-  async addComment(comment: Comment, form: NgForm) {
-    this.commentService
-      .addComment(comment)
-      .pipe(
-        catchError((err: HttpErrorResponse) => {
-          this.errorMessage = JSON.stringify(err.error.message);
-          if (this.errorMessage.length == 0) {
-            form.resetForm();
-            this.errorMessage = '';
-          }
-          return throwError(err);
-        })
-      )
-      .subscribe((_) => {
-        form.resetForm();
-        this.errorMessage = '';
-      });
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogAddCommentComponent);
+    dialogRef.beforeClosed().subscribe((_) => this.loadComments());
   }
 
-  async onSubmit(form: NgForm) {
-    await this.addComment(this.newComment, form);
+  onDelete(id: number) {
+    const dialogRef = this.dialog.open(DialogDeleteComponent);
+    dialogRef.componentInstance.id = id;
+    dialogRef.beforeClosed().subscribe((_) => this.loadComments());
   }
 }

@@ -29,13 +29,14 @@ public class CommentController {
   @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public void addComment(@RequestBody Comment comment) {
     if (!commentService.addComment(comment)) {
-      System.out.println(CommentUtils.getCommentNotFilledExceptionMessage(comment));
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, CommentUtils.getCommentNotFilledExceptionMessage(comment));
     }
   }
 
   @DeleteMapping("/delete")
-  public void deleteComment(@RequestBody String pin) {
-
+  public void deleteComment(@RequestParam Long id, @RequestParam String pin) {
+    if (!commentService.deleteComment(id, pin)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect pin");
+    }
   }
 }
