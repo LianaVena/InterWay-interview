@@ -16,4 +16,19 @@ export class CommentService {
   public findAll(): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.commentUrl + '/all');
   }
+
+  public addComment(comment: Comment): Observable<any> {
+    return this.http.post<Comment>(
+      this.commentUrl + '/add',
+      JSON.stringify(comment),
+      { headers: { 'content-type': 'application/json' } }
+    );
+  }
+
+  public deleteComment(id: number, pin: string): Observable<any> {
+    return this.http.delete<any>(this.commentUrl + '/delete', {
+      params: { id: id, pin: pin },
+      observe: 'response',
+    });
+  }
 }

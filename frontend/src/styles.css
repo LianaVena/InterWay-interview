@@ -4,6 +4,13 @@
   position: fixed;
   z-index: 2;
   height: 50px;
+  padding-right: 8px !important;
+}
+button {
+  margin-left: 8px;
+}
+.horizontal-spacer {
+  flex: 1 1 auto;
 }
 .header-spacer {
   height: 50px;
@@ -14,11 +21,13 @@ body {
   color: white;
   margin: 0px;
 }
-button {
-  margin-left: 8px;
+.content {
+  margin: 8px 30% 0px 25%;
 }
-.mat-toolbar {
-  padding-right: 8px !important;
+
+/* MAT-CARD */
+.mat-mdc-card {
+  margin-bottom: 8px;
 }
 .mat-mdc-card-header {
   padding: 8px 16px 0px !important;
@@ -27,19 +36,10 @@ button {
   display: flex;
   align-items: center;
 }
-.mat-mdc-card {
-  margin-bottom: 8px;
-}
 .mdc-card__actions {
   padding: 0px !important;
-}
-.content {
-  margin: 8px 30% 0px 25%;
 }
 .inner-card {
   margin: 8px;
   background-color: #696969 !important;
-}
-.example-spacer {
-  flex: 1 1 auto;
 }

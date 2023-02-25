@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+    <mat-card>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <mat-card-header>
+                <mat-card-title>
+                    <input matInput placeholder="name" [(ngModel)]="newComment.name" name="name">
+                    <input matInput placeholder="pin" [(ngModel)]="newComment.pin" name="pin">
+                </mat-card-title>
+                <span class="horizontal-spacer"></span>
+                <mat-card-actions>
+                    <button mat-stroked-button type="submit">Submit</button>
+                </mat-card-actions>
+            </mat-card-header>
+            <mat-card class="inner-card">
+                <mat-card-content>
+                    <textarea style="width: inherit; max-width: inherit;" matInput [(ngModel)]="newComment.text"
+                        name="text"></textarea>
+                </mat-card-content>
+            </mat-card>
+        </form>
+        <p *ngIf="errorMessage">{{errorMessage}}</p>
+    </mat-card>
+</div>
