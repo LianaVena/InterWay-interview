@@ -1,7 +1,8 @@
 package vena.commentwebapp.data;
 
-import jakarta.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Data
