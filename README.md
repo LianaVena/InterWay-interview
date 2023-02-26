@@ -1,5 +1,7 @@
 # InterWay-interview
-Web application for posting and viewing comments for InterWay interview
+Web application for InterWay interview
+
+App is for displaying comments. User can add a comment and then edit or delete it using a pin.
 
 ## Prerequisites
 1. [JDK 17](https://www.oracle.com/java/technologies/downloads/#jdk17-windows)
@@ -14,3 +16,6 @@ Web application for posting and viewing comments for InterWay interview
 ## Run
 - Backend: `java -jar target/comment-web-app-1.0.jar`
 - Frontend: `ng serve -o`
+
+## Swagger
+http://localhost:8080/swagger-ui/#/
