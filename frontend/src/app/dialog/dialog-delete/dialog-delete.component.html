@@ -1,11 +1,14 @@
 <div mat-dialog-content>
-    <h1 mat-dialog-title>Are you sure you want to delete?</h1>
-    <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <input matInput placeholder="pin" [(ngModel)]="pin" name="pin">
-        <br>
-        <span *ngIf="errorMessage">{{errorMessage}}</span>
-        <br>
-        <button mat-stroked-button mat-dialog-close>Cancel</button>
-        <button mat-stroked-button type="submit">Delete</button>
-    </form>
+  <h1 mat-dialog-title>Are you sure you want to delete?</h1>
+  <form #form="ngForm" (ngSubmit)="onSubmit()" align="center">
+    <mat-form-field>
+      <mat-label>Pin</mat-label>
+      <input matInput placeholder="pin" [(ngModel)]="pin" name="pin" />
+    </mat-form-field>
+    <div align="end">
+      <span *ngIf="errorMessage">{{ errorMessage }}</span>
+      <button mat-stroked-button mat-dialog-close>Cancel</button>
+      <button mat-stroked-button type="submit">Delete</button>
+    </div>
+  </form>
 </div>

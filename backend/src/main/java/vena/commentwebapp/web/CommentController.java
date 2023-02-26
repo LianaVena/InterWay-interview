@@ -1,18 +1,16 @@
 package vena.commentwebapp.web;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import vena.commentwebapp.business.CommentService;
 import vena.commentwebapp.data.Comment;
-import vena.commentwebapp.util.CommentUtils;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/comment")
-@CrossOrigin(origins = "http://localhost:4200, http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CommentController {
 
   private final CommentService commentService;
@@ -21,18 +19,49 @@ public class CommentController {
     this.commentService = commentService;
   }
 
+  /**
+   * Get endpoint for getting all comments from the database without their pin
+   *
+   * @return json containing all comments
+   */
   @GetMapping("/all")
   public List<Comment> getAllComments() {
     return commentService.getAllComments();
   }
 
-  @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  /**
+   * Post endpoint for adding a comment to the database,
+   * throws ResponseStatusException when not all fields are filled
+   *
+   * @param comment Comment object
+   */
+  @PostMapping("/add")
   public void addComment(@RequestBody Comment comment) {
     if (!commentService.addComment(comment)) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, CommentUtils.getCommentNotFilledExceptionMessage(comment));
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "All fields need to be filled");
     }
   }
 
+  /**
+   * Post endpoint for editing a comment,
+   * throws ResponseStatusException when not all fields are filled or the pin is incorrect
+   *
+   * @param comment Comment object
+   */
+  @PostMapping("/edit")
+  public void editComment(@RequestBody Comment comment) {
+    if (!commentService.editComment(comment)) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Couldn't edit comment");
+    }
+  }
+
+  /**
+   * Delete endpoint for deleting a comment from the database,
+   * throws ResponseStatusException if the pin is incorrect
+   *
+   * @param id  id of comment in database
+   * @param pin pin used for editing or deletion
+   */
   @DeleteMapping("/delete")
   public void deleteComment(@RequestParam Long id, @RequestParam String pin) {
     if (!commentService.deleteComment(id, pin)) {

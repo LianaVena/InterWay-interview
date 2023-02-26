@@ -25,10 +25,13 @@ export class CommentService {
     );
   }
 
+  public editComment(comment: Comment): Observable<any> {
+    return this.http.post<Comment>(this.commentUrl + '/edit', comment);
+  }
+
   public deleteComment(id: number, pin: string): Observable<any> {
     return this.http.delete<any>(this.commentUrl + '/delete', {
       params: { id: id, pin: pin },
-      observe: 'response',
     });
   }
 }

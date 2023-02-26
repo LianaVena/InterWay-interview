@@ -1,0 +1,30 @@
+<div mat-dialog-content>
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <mat-form-field style="margin-right: 16px">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="name"
+        [(ngModel)]="comment.name"
+        name="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Pin</mat-label>
+      <input matInput placeholder="pin" [(ngModel)]="comment.pin" name="pin" />
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+      <textarea
+        matInput
+        [(ngModel)]="comment.text"
+        name="text"
+        placeholder="text"
+      ></textarea>
+    </mat-form-field>
+    <div align="end">
+      <span *ngIf="errorMessage">{{ errorMessage }}</span>
+      <button mat-stroked-button mat-dialog-close="">Cancel</button>
+      <button mat-stroked-button type="submit">Submit</button>
+    </div>
+  </form>
+</div>

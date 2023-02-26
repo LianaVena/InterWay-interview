@@ -12,15 +12,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentService } from './comment/comment.service';
-import { DialogAddCommentComponent } from './dialog/dialog-add-comment/dialog-add-comment.component';
+import { DialogAddComponent } from './dialog/dialog-add/dialog-add.component';
 import { DialogDeleteComponent } from './dialog/dialog-delete/dialog-delete.component';
+import { DialogEditComponent } from './dialog/dialog-edit/dialog-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CommentComponent,
-    DialogAddCommentComponent,
+    DialogAddComponent,
     DialogDeleteComponent,
+    DialogEditComponent,
   ],
   imports: [
     BrowserModule,

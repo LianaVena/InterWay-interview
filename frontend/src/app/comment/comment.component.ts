@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddCommentComponent } from '../dialog/dialog-add-comment/dialog-add-comment.component';
+import { DialogAddComponent } from '../dialog/dialog-add/dialog-add.component';
 import { DialogDeleteComponent } from '../dialog/dialog-delete/dialog-delete.component';
+import { DialogEditComponent } from '../dialog/dialog-edit/dialog-edit.component';
 import { Comment } from './comment';
 import { CommentService } from './comment.service';
 
@@ -30,8 +31,15 @@ export class CommentComponent {
       .subscribe((comments) => (this.comments = comments));
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogAddCommentComponent);
+  onAdd() {
+    const dialogRef = this.dialog.open(DialogAddComponent);
+    dialogRef.beforeClosed().subscribe((_) => this.loadComments());
+  }
+
+  onEdit(comment: Comment) {
+    const dialogRef = this.dialog.open(DialogEditComponent);
+    dialogRef.componentInstance.comment = comment;
+    dialogRef.componentInstance.comment.pin = '';
     dialogRef.beforeClosed().subscribe((_) => this.loadComments());
   }
 
